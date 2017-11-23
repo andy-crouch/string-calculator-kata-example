@@ -10,7 +10,10 @@ namespace StringCalculatorKata
     {
         public int Add(string numbers)
         {
-            return 0;
+            if(string.IsNullOrEmpty(numbers) || string.IsNullOrWhiteSpace(numbers))
+                return 0;
+
+            return Convert.ToInt32(numbers);
         }
     }
 }

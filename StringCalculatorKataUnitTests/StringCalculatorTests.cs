@@ -31,5 +31,32 @@ namespace StringCalculatorKataUnitTests
             const int ExpectedResult = 0;
             Assert.AreEqual(ExpectedResult, result);
         }
+
+        [TestMethod]
+        public void Add_WhenPassedNullNumbersString_ReturnsZero()
+        {
+            var result = _stringCalculator.Add(null);
+
+            const int ExpectedResult = 0;
+            Assert.AreEqual(ExpectedResult, result);
+        }
+
+        [TestMethod]
+        public void Add_WhenPassedWhitespaceFilledNumbersString_ReturnsZero()
+        {
+            var result = _stringCalculator.Add(new String(' ', 10));
+
+            const int ExpectedResult = 0;
+            Assert.AreEqual(ExpectedResult, result);
+        }
+
+        [TestMethod]
+        public void Add_WhenPassedNumbersStringContainingOneNumber_ReturnsProvidedNumber()
+        {
+            const int TestValue = 6;
+            var result = _stringCalculator.Add(TestValue.ToString());
+
+            Assert.AreEqual(TestValue, result);
+        }
     }
 }
