@@ -7,14 +7,29 @@ namespace StringCalculatorKataUnitTests
     [TestClass]
     public class StringCalculatorTests
     {
+        StringCalculator _stringCalculator;
+
+        [TestInitialize]
+        public void TestInitialise()
+        {
+            _stringCalculator = new StringCalculator();
+        }
+
         [TestMethod]
         public void Add_ReturnsAnInt()
         {
-            var stringCalculator = new StringCalculator();
-
-            var result = stringCalculator.Add("0");
+            var result = _stringCalculator.Add("0");
 
             Assert.IsInstanceOfType(result, typeof(int));
+        }
+
+        [TestMethod]
+        public void Add_WhenPassedEmtpyNumbersString_ReturnsZero()
+        {
+            var result = _stringCalculator.Add("");
+
+            const int ExpectedResult = 0;
+            Assert.AreEqual(ExpectedResult, result);
         }
     }
 }
