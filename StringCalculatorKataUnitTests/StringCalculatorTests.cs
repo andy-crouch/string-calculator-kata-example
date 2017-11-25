@@ -118,5 +118,50 @@ namespace StringCalculatorKataUnitTests
             const int ExpectedResult = 25;
             Assert.AreEqual(ExpectedResult, result);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Add_WhenPassedNumbersStringContainingANegativeNumber_ThrowsArgumentException()
+        {
+            var result = _stringCalculator.Add("//|\n-10");
+        }
+
+        [TestMethod]
+        public void Add_WhenPassedNumbersStringContainingANegativeNumber_ThrowsArgumentExceptionWithNegativeValueInMessage()
+        {
+            var negativeNumber = -14;
+
+            try
+            {
+                var result = _stringCalculator.Add($"//|\n{negativeNumber}");
+
+            }
+            catch (ArgumentException argumentException)
+            {
+                const string ExceptionMainMessage = "NEGATIVES NOT ALLOWED";
+
+                Assert.IsTrue(argumentException.Message.ToUpper().StartsWith(ExceptionMainMessage));
+                Assert.IsTrue(argumentException.Message.ToUpper().Contains(negativeNumber.ToString()));
+            }
+        }
+
+        [TestMethod]
+        public void Add_WhenPassedNumbersStringContainingANegativeNumbers_ThrowsArgumentExceptionWithNegativeValuesInMessage()
+        {
+            var negativeNumbers = "-12|-18|-17";
+
+            try
+            {
+                var result = _stringCalculator.Add($"//|\n{negativeNumbers}");
+
+            }
+            catch (ArgumentException argumentException)
+            {
+                const string ExceptionMainMessage = "NEGATIVES NOT ALLOWED";
+
+                Assert.IsTrue(argumentException.Message.ToUpper().StartsWith(ExceptionMainMessage));
+                Assert.IsTrue(argumentException.Message.ToUpper().Contains(negativeNumbers.Replace("|", ",")));
+            }
+        }
     }
 }

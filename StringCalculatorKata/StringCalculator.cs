@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace StringCalculatorKata
@@ -16,10 +17,33 @@ namespace StringCalculatorKata
             var delimiters = GetDelimitersFrom(numbers);
             numbers = RemoveDelimiterDataFrom(numbers);
 
-            return numbers
+            var integerNumbers
+                = numbers
                     .Split(delimiters, StringSplitOptions.RemoveEmptyEntries)
-                    .Select(stringNumber => Convert.ToInt32(stringNumber))
-                    .Sum();
+                    .Select(stringNumber => Convert.ToInt32(stringNumber));
+
+            Validate(integerNumbers);
+
+            return integerNumbers.Sum();
+        }
+
+        private void Validate(IEnumerable<Int32> numbers)
+        {
+            var negativeNumbers
+                 = numbers
+                    .Where(number => number < 0)
+                    .Select(number => number)
+                    .ToList();
+
+            if( negativeNumbers.Any())
+            {
+                const string ExceptionMainMessage = "Negatives Not Allowed";
+
+                var exceptionMessage 
+                    = $"{ExceptionMainMessage} = {string.Join(",", negativeNumbers)}";
+
+                throw new ArgumentException(exceptionMessage);
+            }
         }
 
         private bool IsNullEmptyOrWhitespaceFilled(string numbers)
