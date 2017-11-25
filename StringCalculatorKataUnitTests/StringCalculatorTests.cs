@@ -163,5 +163,26 @@ namespace StringCalculatorKataUnitTests
                 Assert.IsTrue(argumentException.Message.ToUpper().Contains(negativeNumbers.Replace("|", ",")));
             }
         }
+
+        [TestMethod]
+        public void Add_WhenPassedNumbersStringContainingNumbersLargerThanAThousand_ReturnSumOfNumbersLessThanAThousand()
+        {
+            var result = _stringCalculator.Add("//|\n1050|10|5");
+
+            const int ExpectedResult = 15;
+            Assert.AreEqual(ExpectedResult, result);
+        }
+
+        [TestMethod]
+        public void Add_WhenPassedNumbersStringContainingNumbersEqualToAThousand_ReturnSumOfAllNumbers()
+        {
+            var result = _stringCalculator.Add("//|\n1000|10|5");
+
+            const int ExpectedResult = 1015;
+            Assert.AreEqual(ExpectedResult, result);
+        }
+
+
+
     }
 }

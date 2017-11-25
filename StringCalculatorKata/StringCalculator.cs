@@ -17,9 +17,12 @@ namespace StringCalculatorKata
             var delimiters = GetDelimitersFrom(numbers);
             numbers = RemoveDelimiterDataFrom(numbers);
 
+            const int MaxNumberToCalculate = 1000;
+
             var integerNumbers
                 = numbers
                     .Split(delimiters, StringSplitOptions.RemoveEmptyEntries)
+                    .Where(stringNumber => Convert.ToInt32(stringNumber) <= MaxNumberToCalculate)
                     .Select(stringNumber => Convert.ToInt32(stringNumber));
 
             Validate(integerNumbers);
