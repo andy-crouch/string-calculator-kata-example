@@ -10,6 +10,8 @@ namespace StringCalculatorKataUnitTests
     {
         StringCalculator _stringCalculator;
 
+        public string Delimiter { get; private set; }
+
         [TestInitialize]
         public void TestInitialise()
         {
@@ -75,8 +77,8 @@ namespace StringCalculatorKataUnitTests
             var testNumbers = Enumerable.Range(0, 30);
             var expectedResult = testNumbers.Sum();
 
-            const string Delimeter = ",";
-            var result = _stringCalculator.Add(string.Join(Delimeter, testNumbers));
+            const string Delimiter = ",";
+            var result = _stringCalculator.Add(string.Join(Delimiter, testNumbers));
 
             Assert.AreEqual(expectedResult, result);
         }
@@ -96,6 +98,24 @@ namespace StringCalculatorKataUnitTests
             var result = _stringCalculator.Add("8\n8,2");
 
             const int ExpectedResult = 18;
+            Assert.AreEqual(ExpectedResult, result);
+        }
+
+        [TestMethod]
+        public void Add_WhenPassedNumbersStringSpecifyingDelimiterAndSingleNumber_ReturnsNumberValue()
+        {
+            var result = _stringCalculator.Add("//;\n10");
+
+            const int ExpectedResult = 10;
+            Assert.AreEqual(ExpectedResult, result);
+        }
+
+        [TestMethod]
+        public void Add_WhenPassedNumbersStringSpecifyingDelimiterAndMultipleNumbers_ReturnsSumOfNumbers()
+        {
+            var result = _stringCalculator.Add("//|\n10|10|5");
+
+            const int ExpectedResult = 25;
             Assert.AreEqual(ExpectedResult, result);
         }
     }
