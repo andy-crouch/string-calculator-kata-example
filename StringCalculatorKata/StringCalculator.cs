@@ -10,11 +10,10 @@ namespace StringCalculatorKata
             if(IsNullEmptyOrWhitespaceFilled(numbers))
                 return 0;
 
-
-            const char Delimiter = ',';
+            var delimiters = new char[] { ',', '\n' };
 
             return numbers
-                    .Split(new char[] { Delimiter })
+                    .Split(delimiters, StringSplitOptions.RemoveEmptyEntries)
                     .Select(stringNumber => Convert.ToInt32(stringNumber))
                     .Sum();
         }

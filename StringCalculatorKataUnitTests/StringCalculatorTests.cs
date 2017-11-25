@@ -81,7 +81,22 @@ namespace StringCalculatorKataUnitTests
             Assert.AreEqual(expectedResult, result);
         }
 
+        [TestMethod]
+        public void Add_WhenPassedNumbersStringContainingMultipleNumbersAndNewLineDelimiter_ReturnsSumOfAllNumbers()
+        {
+            var result = _stringCalculator.Add("2\n4");
 
+            const int ExpectedResult = 6;
+            Assert.AreEqual(ExpectedResult, result);
+        }
 
+        [TestMethod]
+        public void Add_WhenPassedNumbersStringContainingMultipleNumbersAndNewLineAndCommaDelimiter_ReturnsSumOfAllNumbers()
+        {
+            var result = _stringCalculator.Add("8\n8,2");
+
+            const int ExpectedResult = 18;
+            Assert.AreEqual(ExpectedResult, result);
+        }
     }
 }
