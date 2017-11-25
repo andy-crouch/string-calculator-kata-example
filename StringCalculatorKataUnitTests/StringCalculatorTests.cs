@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StringCalculatorKata;
+using System.Linq;
 
 namespace StringCalculatorKataUnitTests
 {
@@ -67,6 +68,19 @@ namespace StringCalculatorKataUnitTests
             const int ExpectedResult = 6;
             Assert.AreEqual(ExpectedResult, result);
         }
+
+        [TestMethod]
+        public void Add_WhenPassedNumbersStringContainingMoreThanTwoNumbers_ReturnsSumOfAllNumbers()
+        {
+            var testNumbers = Enumerable.Range(0, 30);
+            var expectedResult = testNumbers.Sum();
+
+            const string Delimeter = ",";
+            var result = _stringCalculator.Add(string.Join(Delimeter, testNumbers));
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
 
 
     }
