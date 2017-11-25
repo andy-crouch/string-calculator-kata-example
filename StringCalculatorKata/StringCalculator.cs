@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StringCalculatorKata
 {
@@ -10,10 +7,21 @@ namespace StringCalculatorKata
     {
         public int Add(string numbers)
         {
-            if(string.IsNullOrEmpty(numbers) || string.IsNullOrWhiteSpace(numbers))
+            if(IsNullEmptyOrWhitespaceFilled(numbers))
                 return 0;
 
-            return Convert.ToInt32(numbers);
+
+            const char Delimiter = ',';
+
+            return numbers
+                    .Split(new char[] { Delimiter })
+                    .Select(stringNumber => Convert.ToInt32(stringNumber))
+                    .Sum();
+        }
+
+        private bool IsNullEmptyOrWhitespaceFilled(string numbers)
+        {
+            return string.IsNullOrEmpty(numbers) || string.IsNullOrWhiteSpace(numbers);
         }
     }
 }

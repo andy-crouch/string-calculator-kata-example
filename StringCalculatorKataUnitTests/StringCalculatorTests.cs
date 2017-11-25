@@ -58,5 +58,16 @@ namespace StringCalculatorKataUnitTests
 
             Assert.AreEqual(TestValue, result);
         }
+
+        [TestMethod]
+        public void Add_WhenPassedNumbersStringContainingTwoNumbers_ReturnsSumOfBothNumbers()
+        {
+            var result = _stringCalculator.Add("4,2");
+
+            const int ExpectedResult = 6;
+            Assert.AreEqual(ExpectedResult, result);
+        }
+
+
     }
 }
