@@ -182,7 +182,13 @@ namespace StringCalculatorKataUnitTests
             Assert.AreEqual(ExpectedResult, result);
         }
 
+        [TestMethod]
+        public void Add_WhenPassedNumbersStringContainingMultplieNumbersWithVariableLengthDelimiter_ReturnsSumOfAllNumbers()
+        {
+            var result = _stringCalculator.Add("//[***]\n10***90***15");
 
-
+            const int ExpectedResult = 115;
+            Assert.AreEqual(ExpectedResult, result);
+        }
     }
 }

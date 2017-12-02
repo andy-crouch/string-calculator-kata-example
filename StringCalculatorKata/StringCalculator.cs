@@ -56,14 +56,30 @@ namespace StringCalculatorKata
 
         private string[] GetDelimitersFrom(string numbers)
         {
-            if (numbers.StartsWith(DelimiterLineStartMarker) && 
-                numbers.Contains(DelimiterLineEndMarker))
+            if(DoesNotContainDelimiterData(numbers))
+                return new string[] { ",", "\n" };
+
+            int length = numbers.IndexOf(DelimiterLineEndMarker) - 2;
+            var delimiterData = numbers.Substring(2, length);
+
+            const string DelimiterOpening = "[";
+            const string DelimiterEnding = "[";
+
+            if(delimiterData.Contains(DelimiterOpening) || delimiterData.Contains(DelimiterEnding))
             {
-                var delimiterString = numbers.Substring(2, 1);
-                return new string[] { delimiterString };
+                delimiterData = delimiterData.Substring(1, delimiterData.Length - 2);
+                return delimiterData
+                        .Replace("][", ",")
+                        .Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
             }
 
-            return new string[] { ",", "\n" };
+            var delimiterString = numbers.Substring(2, 1);
+                return new string[] { delimiterString };
+        }
+
+        private bool DoesNotContainDelimiterData(string numbers)
+        {
+            return !numbers.StartsWith(DelimiterLineStartMarker);
         }
 
         private string RemoveDelimiterDataFrom(string numbers)
