@@ -56,7 +56,7 @@ namespace StringCalculatorKata
 
         private string[] GetDelimitersFrom(string numbers)
         {
-            if(DoesNotContainDelimiterData(numbers))
+            if(NoDelimiterDataExistsIn(numbers))
                 return new string[] { ",", "\n" };
 
             int length = numbers.IndexOf(DelimiterLineEndMarker) - 2;
@@ -77,7 +77,7 @@ namespace StringCalculatorKata
                 return new string[] { delimiterString };
         }
 
-        private bool DoesNotContainDelimiterData(string numbers)
+        private bool NoDelimiterDataExistsIn(string numbers)
         {
             return !numbers.StartsWith(DelimiterLineStartMarker);
         }
