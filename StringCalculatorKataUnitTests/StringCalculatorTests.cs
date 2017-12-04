@@ -19,7 +19,7 @@ namespace StringCalculatorKataUnitTests
         }
 
         [TestMethod]
-        public void Add_ReturnsAnInt()
+        public void Add_ReturnsAnInteger()
         {
             var result = _stringCalculator.Add("0");
 
