@@ -59,22 +59,33 @@ namespace StringCalculatorKata
             if(NoDelimiterDataExistsIn(numbers))
                 return new string[] { ",", "\n" };
 
-            int length = numbers.IndexOf(DelimiterLineEndMarker) - 2;
-            var delimiterData = numbers.Substring(2, length);
+            const string DelimiterOpeningBracket = "[";
+            const string DelimiterEndBracket = "[";
+            const int DelimiterDataStartPosition = 2;
 
-            const string DelimiterOpening = "[";
-            const string DelimiterEnding = "[";
+            int delimiterDataLength 
+                = numbers.IndexOf(DelimiterLineEndMarker) - DelimiterDataStartPosition;
 
-            if(delimiterData.Contains(DelimiterOpening) || delimiterData.Contains(DelimiterEnding))
+            var delimiterData = numbers.Substring(DelimiterDataStartPosition, delimiterDataLength);
+
+            if(delimiterData.Contains(DelimiterOpeningBracket) || 
+               delimiterData.Contains(DelimiterEndBracket))
             {
-                delimiterData = delimiterData.Substring(1, delimiterData.Length - 2);
+                const string DelimiterListSeperator = "][";
+                const int DelimiterListStartPosition = 1;
+                const int DelimiterListEndAdjustment = 2;
+
+                delimiterData = delimiterData
+                    .Substring(DelimiterListStartPosition, delimiterData.Length - DelimiterListEndAdjustment);
+
                 return delimiterData
-                        .Replace("][", ",")
-                        .Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+                        .Split(new string[] { DelimiterListSeperator }, StringSplitOptions.RemoveEmptyEntries);
             }
 
-            var delimiterString = numbers.Substring(2, 1);
-                return new string[] { delimiterString };
+            const int DefaultDelimiterLength = 1;
+            var delimiterString = numbers.Substring(DelimiterDataStartPosition, DefaultDelimiterLength);
+
+            return new string[] { delimiterString };
         }
 
         private bool NoDelimiterDataExistsIn(string numbers)
