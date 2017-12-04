@@ -8,7 +8,7 @@ The solution here is aimed at .Net developers.  It is written in C# and compiles
 
 ## Supporting post
 
-This repo was created to support a blog post I authored which is located [here](string-calculator-kata-dotnet).
+This repo was created to support a blog post I authored which is located [here](https://amcrou.ch/string-calculator-kata-dotnet).
 
 As I cover in the blog post, this solution was completed a step at a time and then committed. This was to allow someone to read back through the commit log to see the steps and tests I completed.  The post and repo were inspired when using the Kata as a teaching tool with a recent junior hire.
 
